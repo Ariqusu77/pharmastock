@@ -6,7 +6,7 @@ const PORT = process.env.PORT || 4000;
 
 async function start() {
   const container = createContainer();
-  const app = createApp(container);
+  const app = createApp({ ...container, frontendDist: process.env.FRONTEND_DIST });
   try {
     await container.sequelize.authenticate();
     await container.sequelize.sync({ alter: true });
