@@ -1,0 +1,198 @@
+/* ============================================================
+   PHARMASTOCK — STYLING TEMPLATE (design tokens)
+   ------------------------------------------------------------
+   Concept: "hospital wayfinding meets medication label".
+   Deep pharmacy green for chrome, clinical off-white paper for
+   content, monospace for anything that reads like a label
+   (drug codes, quantities, order numbers), and stamp-style
+   status chips. Change the tokens here and the whole app
+   follows.
+   ============================================================ */
+
+:root {
+  /* ---- Color: core ---- */
+  --ink: #16211b;            /* primary text, near-black green */
+  --ink-soft: #4d5f56;       /* secondary text */
+  --paper: #f4f7f5;          /* app background */
+  --card: #ffffff;           /* surfaces */
+  --line: #dbe4de;           /* hairline borders */
+  --line-strong: #b7c6bd;
+
+  /* ---- Color: brand ---- */
+  --green-900: #0e2419;      /* sidebar / deepest chrome */
+  --green-800: #16382a;
+  --green-700: #1e5b41;      /* primary actions */
+  --green-600: #2a7554;      /* hover on primary */
+  --mint: #ddeae2;           /* soft fills, selected rows */
+  --mint-strong: #bcd8c9;
+
+  /* ---- Color: status ---- */
+  --pending: #b77816;        /* amber — waiting for pharmacy */
+  --pending-bg: #f7ecd9;
+  --approved: #1e5b41;       /* green — stock reserved */
+  --approved-bg: #ddeae2;
+  --rejected: #b3402e;       /* red — refused, also low stock */
+  --rejected-bg: #f6e2de;
+  --fulfilled: #33556b;      /* slate blue — handed over, closed */
+  --fulfilled-bg: #dfe9ef;
+  --cancelled: #5d6660;      /* neutral gray — withdrawn by the department */
+  --cancelled-bg: #e8ebe9;
+
+  /* ---- Type ---- */
+  --font-display: 'Archivo', sans-serif;      /* headings, signage */
+  --font-body: 'Inter', sans-serif;           /* everything else */
+  --font-mono: 'IBM Plex Mono', monospace;    /* codes, qty, order no. */
+
+  --text-xs: 0.72rem;
+  --text-sm: 0.84rem;
+  --text-md: 0.95rem;
+  --text-lg: 1.15rem;
+  --text-xl: 1.5rem;
+  --text-2xl: 2.1rem;
+
+  /* ---- Space & shape ---- */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --shadow-card: 0 1px 2px rgba(22, 33, 27, 0.06), 0 4px 12px rgba(22, 33, 27, 0.05);
+
+  /* ---- Layout ---- */
+  --sidebar-w: 232px;
+  --content-max: 1100px;
+}
+
+/* ---- Reset & base ---- */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { -webkit-font-smoothing: antialiased; }
+
+body {
+  font-family: var(--font-body);
+  font-size: var(--text-md);
+  color: var(--ink);
+  background: var(--paper);
+  line-height: 1.55;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.15;
+}
+
+button { font-family: inherit; cursor: pointer; }
+input, select, textarea { font-family: inherit; font-size: var(--text-md); }
+
+:focus-visible {
+  outline: 2px solid var(--green-700);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+
+/* ---- Reusable primitives ---- */
+
+/* Eyebrow: small uppercase section label, signage style */
+.eyebrow {
+  font-family: var(--font-display);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--ink-soft);
+}
+
+/* Anything that reads like a label: drug codes, order numbers, qty */
+.mono {
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+  letter-spacing: 0.01em;
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+}
+
+/* Stamp: status chip styled like an ink stamp on a label */
+.stamp {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 0.2em 0.7em;
+  border-radius: var(--radius-sm);
+  border: 1.5px solid currentColor;
+}
+.stamp--pending   { color: var(--pending);   background: var(--pending-bg); }
+.stamp--approved  { color: var(--approved);  background: var(--approved-bg); }
+.stamp--rejected  { color: var(--rejected);  background: var(--rejected-bg); }
+.stamp--fulfilled { color: var(--fulfilled); background: var(--fulfilled-bg); }
+.stamp--cancelled { color: var(--cancelled); background: var(--cancelled-bg); }
+
+/* Tear line: dashed separator, like the perforation on a label roll */
+.tearline {
+  border: 0;
+  border-top: 1.5px dashed var(--line-strong);
+  margin: var(--space-3) 0;
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45em;
+  font-weight: 600;
+  font-size: var(--text-sm);
+  padding: 0.55em 1.1em;
+  border-radius: var(--radius-md);
+  border: 1px solid transparent;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+.btn--primary { background: var(--green-700); color: #fff; }
+.btn--primary:hover { background: var(--green-600); }
+.btn--ghost {
+  background: transparent;
+  color: var(--green-700);
+  border-color: var(--line-strong);
+}
+.btn--ghost:hover { background: var(--mint); border-color: var(--mint-strong); }
+.btn--danger { background: transparent; color: var(--rejected); border-color: var(--rejected); }
+.btn--danger:hover { background: var(--rejected-bg); }
+.btn:disabled { opacity: 0.45; cursor: not-allowed; }
+
+/* Form fields */
+.field { display: flex; flex-direction: column; gap: 0.3rem; }
+.field label {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--ink-soft);
+}
+.field input, .field select, .field textarea {
+  padding: 0.55em 0.75em;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-md);
+  background: var(--card);
+  color: var(--ink);
+}
+.field input:focus, .field select:focus, .field textarea:focus {
+  border-color: var(--green-700);
+  outline: none;
+  box-shadow: 0 0 0 3px var(--mint);
+}
